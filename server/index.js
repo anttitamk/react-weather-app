@@ -13,12 +13,29 @@ app.unsubscribe(express.json);
 app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-// import express router from api/cities.js to get access to api endpoint
-// registering api middleware that is created in api/cities.js
-// with this calling GET to cities endpoint will now retrieve cities
-// if post is called with a new city name, the model defined in api endpoint will see that new city is added to db
+/* 
+import express router from api/cities.js to get access to api endpoint
+registering api middleware that is created in api/cities.js
+with this calling GET to cities endpoint will now retrieve cities
+if post is called with a new city name, the model defined in api endpoint will see that new city is added to db
+*/
 app.use('/api/cities', require('./api/cities'));
 app.use('/api/weather', require('./api/weather'));
+
+/*
+In production environment,
+ensure serving the static react files from the parent directory
+and 
+as a fail safe, ensure serving the static index file
+__dirname = current directory
+../client/build = parent directory where all static react files are at
+*/
+if (ENV == 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')))
+    app.use((req, res) => {
+        res.sendFile(path.join(__dirname, '../client/build/index.html'))
+    })
+}
 
 // make express responsive to requests
 // express listens to a port of the server, handles the request and responds
