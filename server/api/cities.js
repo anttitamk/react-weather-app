@@ -5,21 +5,23 @@ var Cities = require('../models/cities');
 var router = express.Router();
 
 
-// basic mechanism for express middleware
-// request object to get more information
-// data will be returned to frontend as json using response
-// get request to this router will return cities
-router.get('/', function(req, res) {
-    Cities.retrieveAll(function (err, cities) {
+/* 
+basic mechanism for express middleware
+request object to get more information
+data will be returned to frontend as json using response
+get request to this router will return cities
+*/
+router.get('/', (req, res) => {
+    Cities.retrieveAll((err, cities) => {
         if (err)
             return res.json(err);
         return res.json(cities);
     });
 });
 
-router.post('/', function(req, res) {
+router.post('/', (req, res) => {
     var city = req.body.city;
-    Cities.insert(city, function (err, result) {
+    Cities.insert(city, (err, result) => {
         if (err)
             return res.json(err);
         return res.json(result);

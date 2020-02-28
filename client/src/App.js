@@ -64,7 +64,6 @@ class App extends Component {
     axios(`/api/weather/${city}`)
     .then(res => res.data)
     .then(weather => {
-      console.log(weather)
       this.setState({weather})
     })
   }

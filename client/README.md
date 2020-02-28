@@ -1,3 +1,8 @@
+# Weather app - React front end
+A simple interface for viewing weather datat that is received from OpenWeatherMap API.
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
