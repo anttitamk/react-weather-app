@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 // import express router from api/cities.js to get access to api endpoint
 // registering api middleware that is created in api/cities.js
-// with this calling get to cities endpoint will now retrieve cities
+// with this calling GET to cities endpoint will now retrieve cities
 // if post is called with a new city name, the model defined in api endpoint will see that new city is added to db
 app.use('/api/cities', require('./api/cities'));
 app.use('/api/weather', require('./api/weather'));
