@@ -28,4 +28,13 @@ router.post('/', (req, res) => {
     });
 });
 
+router.delete('/', (req, res) => {
+    var city = req.body.city;
+    Cities.delete(city, (err, result) => {
+        if (err)
+            return res.json(err);
+        return res.json(result);
+    })
+})
+
 module.exports = router;

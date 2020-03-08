@@ -60,10 +60,21 @@ class App extends Component {
     })
   }
 
+  handleDeleteCity = (city) => {
+    axios({
+      method: 'delete',
+      url: '/api/cities',
+      data: {city: city}
+    })
+    .then(res => res.data)
+    .then(this.getCityList())
+  }
+
   getWeather = (city) => {
     axios(`/api/weather/${city}`)
     .then(res => res.data)
     .then(weather => {
+      if (weather.error !== undefined) this.handleDeleteCity(city)
       this.setState({weather})
     })
   }
