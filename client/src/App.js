@@ -96,7 +96,7 @@ class App extends Component {
 
               <InputGroup>
                 <Input
-                placeholder="Anna kaupungin nimi..."
+                placeholder="Anna kaupungin nimi englanniksi..."
                 value={this.state.newCityName}
                 onChange={this.handleInputChange}/>
 
