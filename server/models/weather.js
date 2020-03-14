@@ -9,7 +9,7 @@ require('dotenv').config();
 class Weather {
     static retrieveByCity (city, callback) {
         axios({
-            url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${process.env.WEATHER_API_KEY}&units=metric`
+            url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=${process.env.WEATHER_API_KEY}&units=metric&lang=fi`
         }).then((res) => {
             callback(res.data);
         }).catch((err) => {

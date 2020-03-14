@@ -2,6 +2,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-size: 1.4rem;
+  background: linear-gradient(to right, rgb(20, 136, 204), rgb(0, 113, 251));
+  height: 100%;
 }
 
 .form-group {
@@ -15,4 +18,72 @@ body {
 
 .weather {
   margin-top: 30px
+}
+
+.jumbotron {
+  width: 100%;
+  background: linear-gradient(to right, rgb(20, 136, 204), rgb(0, 113, 251));
+}
+
+.btn {
+  border-color: #ffffff !important;
+}
+
+.white-text {
+  color: #cce8ff
+}
+
+.city-dropdown {
+  margin-top: 20px
+}
+
+.table {
+  color: #cce8ff !important;
+}
+
+.degrees {
+  font-size: 4.5rem;  
+  margin-top: 35px;
+}
+
+.main-weather {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  width: 50%;
+  border-right: solid;
+  float: left;  
+  height: 250px;
+}
+
+.main-description {
+  font-size: 1.5rem;
+}
+
+.weather-table {
+  display: inline-block;
+  margin-top: 50px;
+}
+
+.slider {
+  margin-left: 2em;
+  margin-right: 2em;
+  clear: both;
+}
+
+.card {
+  background: linear-gradient(to right, rgb(53, 96, 204), rgb(10, 124, 227), rgb(10, 124, 227), rgb(53, 96, 204));
+}
+
+@media screen and (max-width:480px){
+
+    .main-weather {
+      width: 100%;
+      border-right: none;
+      float: none;
+      height: auto;
+    }
+
+    .weather-table {
+      margin-top: 30px;
+    }
 }

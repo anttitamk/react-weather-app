@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-
 import Weather from './weather';
+import SlideView from './slideView'
 
 import {
   Container,
   Button,
   Row,
   Col,
-  Navbar,
-  NavbarBrand,
   Jumbotron,
   InputGroup,
   Input,
@@ -17,7 +15,6 @@ import {
 } from 'reactstrap';
 
 const axios = require('axios');
-
 
 class App extends Component {
 
@@ -80,7 +77,8 @@ class App extends Component {
   }
 
   handleChangeCity = (e) => {
-    this.getWeather(e.target.value)
+    if (e.target.value !== 'Select a city') this.getWeather(e.target.value)
+    else this.setState({weather: null})
   }
 
   componentDidMount () {
@@ -90,45 +88,39 @@ class App extends Component {
   render()
   {
     return (
-      <Container fluid className="centered">
-        <Navbar dark color="dark">
-          <NavbarBrand href="/">Weather app</NavbarBrand>
-        </Navbar>
+        <Container fluid className="centered">
         <Row>
-          <Col>
-            <Jumbotron>
-              <h1 className="display-3">MyWeather</h1>
-              <p className="lead">The current weather for your cities!</p>
+            <Jumbotron className="jumbotron">
+              <h1 className="display-3 white-text">Päivän sää</h1>
+              <p className="lead white-text" style={{paddingBottom: '1em'}}>Lempikaupunkiesi 5 päivän ennuste!</p>
 
               <InputGroup>
                 <Input
-                placeholder="New city name..."
+                placeholder="Anna kaupungin nimi..."
                 value={this.state.newCityName}
                 onChange={this.handleInputChange}/>
 
                 <InputGroupAddon addonType="append">
-                  <Button color="primary" onClick={this.handleAddCity}>Add city</Button>
+                  <Button color="primary" onClick={this.handleAddCity}>Lisää kaupunki</Button>
                 </InputGroupAddon>
                 
               </InputGroup>
 
             </Jumbotron>
-          </Col>
         </Row>
-        <Row>
-          <Col>
-            <h1 className="display-5">Current weather</h1>
-            <FormGroup>
-              <Input type="select" onChange={this.handleChangeCity}>
-                { this.state.cityList.length === 0 && <option>No cities added yet</option> }
-                { this.state.cityList.length > 0 && <option>Select a city</option> }
-                { this.state.cityList.map((city, i) => <option key={i}>{city}</option>) }
-              </Input>
-            </FormGroup>
-          </Col>
-        </Row>
+        <Col>
+          <h1 className="display-5 white-text">Kaupunki</h1>
+          <FormGroup>
+            <Input type="select" className="city-dropdown" onChange={this.handleChangeCity}>
+              { this.state.cityList.length === 0 && <option>Kaupunkeja ei vielä lisätty</option> }
+              { this.state.cityList.length > 0 && <option>Valitse kaupunki</option> }
+              { this.state.cityList.map((city, i) => <option key={i}>{city}</option>) }
+            </Input>
+          </FormGroup>
+        </Col>
         <Weather data={this.state.weather}/>
-      </Container>
+        <SlideView data={this.state.weather}/>
+        </Container>
     );
   }  
 }

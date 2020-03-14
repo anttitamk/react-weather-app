@@ -15,8 +15,7 @@ class Cities {
                   WHERE
                   NOT EXISTS (
                       SELECT * FROM cities WHERE city_name = '${city}'
-                  )
-                  PRINT @@ROWCOUNT`, 
+                  )`, 
                 (err, res) => {
             if (err.error)
                 return callback(err);

@@ -8,7 +8,7 @@ function Weather(result) {
 
     var data = null;
 
-    if (result.data !== null && result.data.error === undefined) data = result.data
+    if (result.data !== null && result.data.error === undefined && result.data.cod === "200") data = result.data
     else if (result.data !== null && result.data !== undefined && result.data.error !== undefined) 
         return <Alert dismissible color="primary" onClose={() => setShow(false)}>
             {result.data.error} Invalid city name. City has been removed from the list.
@@ -17,36 +17,44 @@ function Weather(result) {
 
     if (show){
         return (
-            <Row className="weather">
-                <Col sm="12" md={{size: 4, offset: 4}}>
-                    <h2>{data.name}</h2>
-                    <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="Weather icon"/>
-                    <span>{data.weather[0].main}</span>&nbsp;
-                    <span>{Math.floor(data.main.temp)}&deg;C</span>
-                    <Table>
-                        <tbody>
-                            <tr>
-                                <td>Wind</td>
-                                <td>{(data.wind.speed * 0.277778).toFixed(2)} m/s</td>
-                            </tr>
-                            <tr>
-                                <td>Pressure</td>
-                                <td>{Math.floor(data.main.pressure)} hPa</td>
-                            </tr>
-                            <tr>
-                                <td>Humidity</td>
-                                <td>{Math.floor(data.main.humidity)} %</td>
-                            </tr>
-                            <tr>
-                                <td>Min. temp</td>
-                                <td>{Math.floor(data.main.temp_min)} &deg;C</td>
-                            </tr>
-                            <tr>
-                                <td>Max. temp</td>
-                                <td>{Math.floor(data.main.temp_max)} &deg;C</td>
-                            </tr>
-                        </tbody>
-                    </Table>
+            <Row className="weather white-text">
+                <Col>
+                    <h2 style={{fontSize: '3.5rem'}}>{data.city.name}</h2>
+                    <div>
+                        <div className="main-weather">
+                            <div className="degrees">
+                                <img src={`http://openweathermap.org/img/w/${data.list[0].weather[0].icon}.png`} alt="Weather icon"/>
+                                <span style={{marginLeft: '10px'}}>{Math.floor(data.list[0].main.temp)}&deg;C</span>
+                            </div>
+                            <span className="main-description">{data.list[0].weather[0].description[0].toUpperCase() + data.list[0].weather[0].description.slice(1)}</span>&nbsp;
+                        </div>
+                        <div className="weather-table">
+                            <Table>
+                                <tbody>
+                                    <tr>
+                                        <td>Tuulen nopeus</td>
+                                        <td>{(data.list[0].wind.speed * 0.277778).toFixed(2)} m/s</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ilmanpaine</td>
+                                        <td>{Math.floor(data.list[0].main.pressure)} hPa</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kosteus</td>
+                                        <td>{Math.floor(data.list[0].main.humidity)} %</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alin lämpötila</td>
+                                        <td>{Math.floor(data.list[0].main.temp_min)} &deg;C</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ylin lämpötila</td>
+                                        <td>{Math.floor(data.list[0].main.temp_max)} &deg;C</td>
+                                    </tr>
+                                </tbody>
+                            </Table>                        
+                        </div>
+                    </div>                                        
                 </Col>
             </Row>
         );
