@@ -74,7 +74,7 @@ body {
   background: linear-gradient(to right, rgb(53, 96, 204), rgb(10, 124, 227), rgb(10, 124, 227), rgb(53, 96, 204));
 }
 
-@media screen and (max-width:480px){
+@media screen and (max-width:640px){
 
     .main-weather {
       width: 100%;
